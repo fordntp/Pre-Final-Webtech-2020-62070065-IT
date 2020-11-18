@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https: //cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="song"></div>
+
+<style>
+    body{
+        color: #000;
+        font-family: 'Abel', sans-serif; 
+        font-size: 20px;
+    }
+    #head{
+        border-bottom: #fcb0b3 1px solid;
+        padding: 20px 20px 20px 0px;
+    }
+</style>
+    <script>
+        let requestURL = 'ezquiz.json'; 
+        let request = new XMLHttpRequest(); 
+        request.onreadystatechange = function () { 
+            if (request.readyState == 4 && request.status == 200) {             
+                dataReportStatus(JSON.parse(request.responseText));            
+            } }; 
+        request.open("GET", requestURL, true); 
+        request.send(); 
+        
+        function dataReportStatus(data) {
+                let song = "";
+                for (var i=0; i<data.tracks.items.length; i++){
+                    song += '<div class="col-4">';
+                    song += '<div class="card">';
+                    song += '<img class="card-img-top" src="' + data.tracks.items[i].album.images[0].url + '" + alt="Card image cap">';
+                    song += '<div class="card-body">';
+                    song += '<h5 class="card-text">name</h5>';
+                    song += '<p class="card-text">'+  data.tracks.items[i].album.artists[0].name +'</p>';
+                    song += '<p class="card-text">name</p>';
+                    song += '</div>';
+                    song += '</div>';
+                    song += '</div>';
+
+                document.getElementById("song").innerHTML += song;
+                }
+            }
+
+    </script> 
+</body>
+</html>
